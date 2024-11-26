@@ -33,6 +33,22 @@ public class LoadGraph {
 		// TODO: Read in the graph from the reader.
 		// Our solution is 15 lines long, and it uses the following library classes:
 		// * BufferedReader
-		return result;
+		BufferedReader br = new BufferedReader(r);
+	    String str;
+	    String lv = null;	    
+	    while ((str = br.readLine()) != null) {
+	        if (str.trim().isEmpty()) continue;
+	        boolean i = Character.isWhitespace(str.charAt(0));
+	        String vertex = str.trim();	        
+	        if (!i) {
+	            if (!result.addVertex(vertex)) {}
+	            lv = vertex;
+	        } else {
+	            if (lv == null) throw new IOException("First line is indented");	            
+	            result.addVertex(vertex);
+	            result.addEdge(lv, vertex);
+	        }
+	    }	    
+	    return result;
 	}
 }
