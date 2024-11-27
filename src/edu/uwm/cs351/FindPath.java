@@ -42,6 +42,24 @@ public class FindPath<T> {
 		// * HashSet  (for the visited set)
 		// * ArrayList  (to return the final path)
 		// You are welcome to write and use new helper methods, but not to add fields.
-		return null; // no path found
+		if (!graph.containsVertex(v1) || !graph.containsVertex(v2)) throw new IllegalArgumentException("Anyone or both ertices absent in the graph");
+	    if (v1.equals(v2)) return List.of(v1);
+	    Set<T> v = new HashSet<>();
+	    Queue<ImmutableStack<T>> q = new ArrayDeque<>();
+	    for (q.add(ImmutableStack.<T>empty().push(v1)),v.add(v1);!q.isEmpty();) {
+	        ImmutableStack<T> p = q.remove();
+	        for (T n : graph.getConnected(p.top())) {
+	            if (!v.contains(n)) {
+	                if (n.equals(v2)) {
+	                	List<T> fp = new ArrayList<>();
+                        for (T vertex : p.push(n)) fp.add(0, vertex);
+                        return fp;
+	                }
+	                q.add(p.push(n));
+	                v.add(n);
+	            }
+	        }
+	    }
+	    return null;
 	}
 }

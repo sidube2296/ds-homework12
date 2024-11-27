@@ -33,10 +33,9 @@ public class LoadGraph {
 		// TODO: Read in the graph from the reader.
 		// Our solution is 15 lines long, and it uses the following library classes:
 		// * BufferedReader
-		BufferedReader br = new BufferedReader(r);
-	    String str;
+		BufferedReader br = new BufferedReader(r);	    
 	    String lv = null;	    
-	    while ((str = br.readLine()) != null) {
+	    for (String str;(str = br.readLine()) != null;) {
 	        if (str.trim().isEmpty()) continue;	        
 	        if (!Character.isWhitespace(str.charAt(0))) {
 	            if (!result.addVertex(str.trim())) {}
