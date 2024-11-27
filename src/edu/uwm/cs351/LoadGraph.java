@@ -37,16 +37,14 @@ public class LoadGraph {
 	    String str;
 	    String lv = null;	    
 	    while ((str = br.readLine()) != null) {
-	        if (str.trim().isEmpty()) continue;
-	        boolean i = Character.isWhitespace(str.charAt(0));
-	        String vertex = str.trim();	        
-	        if (!i) {
-	            if (!result.addVertex(vertex)) {}
-	            lv = vertex;
+	        if (str.trim().isEmpty()) continue;	        
+	        if (!Character.isWhitespace(str.charAt(0))) {
+	            if (!result.addVertex(str.trim())) {}
+	            lv = str.trim();
 	        } else {
 	            if (lv == null) throw new IOException("First line is indented");	            
-	            result.addVertex(vertex);
-	            result.addEdge(lv, vertex);
+	            result.addVertex(str.trim());
+	            result.addEdge(lv, str.trim());
 	        }
 	    }	    
 	    return result;
